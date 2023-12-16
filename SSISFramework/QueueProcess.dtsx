@@ -1,0 +1,1482 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/7/2019 9:56:15 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-VN16KCP"
+  DTS:CreatorName="DESKTOP-VN16KCP\alexk"
+  DTS:DTSID="{2002CD36-4312-4A0C-85DA-325AA260A41C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="QueueProcess"
+  DTS:PackageType="5"
+  DTS:VersionBuild="265"
+  DTS:VersionGUID="{B7E95244-85CC-4FA3-B45F-0BFE25043030}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Destination]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6A1483C0-91FD-4F88-B3C3-C2B2A1286EE8}"
+      DTS:ObjectName="Destination">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-R6LFB3P;Initial Catalog=QlikICG;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-QueueProcess-{6A1483C0-91FD-4F88-B3C3-C2B2A1286EE8}Destination;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ETLAdmin]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+      DTS:ObjectName="ETLAdmin">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-R6LFB3P;Initial Catalog=ETLAdmin;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-QueueProcess-{19A7488B-263F-40F3-8A96-381897DB9D7E}ETLAdmin;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Source]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{098251C2-2254-4BA8-BAA8-EF78DFACCBD2}"
+      DTS:ObjectName="Source">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-R6LFB3P;Initial Catalog=Source1;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-QueueProcess-{098251C2-2254-4BA8-BAA8-EF78DFACCBD2}Source;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{387361F0-713E-4DBD-AC51-8904510C68C3}"
+      DTS:ObjectName="ExecutePackageTask_Connection">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{160B0D11-E6BF-407C-B925-F3A0BA1BF79A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProcessId">
+      <DTS:VariableValue
+        DTS:DataType="3">2</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clean Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9f4dca69-08cc-4a25-affd-884beddbee2f}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clean Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6A1483C0-91FD-4F88-B3C3-C2B2A1286EE8}"
+          SQLTask:SqlStatementSource="TRUNCATE table [staging].QLIK_VENTASCAB01;&#xA;TRUNCATE table [staging].QLIK_VENTASDET01;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EST Final"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{978376C6-882F-48DE-BBE6-A07736216D14}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EST Final"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[ETLCheckFlowStatusFinal]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EST Initial"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{71197780-D969-4347-968E-D23972DCB071}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EST Initial"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+          SQLTask:SqlStatementSource="EXEC dbo.ETLInitialState ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="@ProcessId"
+            SQLTask:DtsVariableName="User::ProcessId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="2"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute Load"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{289076df-fa4b-41e6-b55c-5a2b0ca857bc}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Load"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Execute Load.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{2150c5ad-10e9-423b-a9fd-43423e475047}"
+          DTS:EventID="15633084"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{6f92bebc-5883-4511-94bc-e8334055412b}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Execute Load.EventHandlers[OnError]\Execute SQL Task"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{19C88C00-4FBB-474C-8B1C-871F62A1C175}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Execute SQL Task">
+              <DTS:Variables />
+              <DTS:PropertyExpression
+                DTS:Name="SqlStatementSource">" UPDATE dbo.ETLExecuteProcess 
+SET  Status = 3 
+WHERE ID= "  + (DT_WSTR, 5) @[User::ProcessId]</DTS:PropertyExpression>
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+                  SQLTask:SqlStatementSource=" UPDATE dbo.ETLExecuteProcess &#xA;SET  Status = 3 &#xA;WHERE ID= 2" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6A1483C0-91FD-4F88-B3C3-C2B2A1286EE8}"
+          SQLTask:SqlStatementSource="EXEC [dwh].[uspMergeQlikTables];" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FLC1"
+      DTS:CreationName="STOCK:FORLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="For Loop Container"
+      DTS:DTSID="{204D477D-D683-46C6-870B-C90A295E1B4B}"
+      DTS:EvalExpression="@ExecuteProcess != 0"
+      DTS:ExecutableType="STOCK:FORLOOP"
+      DTS:InitExpression="@ExecuteProcess = 1000"
+      DTS:LocaleID="-1"
+      DTS:MaxConcurrent="1"
+      DTS:MaxErrorCount="0"
+      DTS:ObjectName="FLC1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{E9A1FA88-092B-4F7D-A4CF-6C8CD568E707}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="ExecuteProcess">
+          <DTS:VariableValue
+            DTS:DataType="3">0</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{950D596D-15D3-416A-873C-F44D4134739C}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="Level">
+          <DTS:VariableValue
+            DTS:DataType="3">1</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{FC27A7DE-9B72-407B-9599-16FBE9B12DD3}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="ProcessId">
+          <DTS:VariableValue
+            DTS:DataType="3">2</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{D4AD7EBD-D881-4878-9DEF-07D660CB3B9D}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="ProcessUnitFLC">
+          <DTS:VariableValue
+            DTS:DataType="3">1</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{ED85A3A6-EAF2-4A3C-A944-23D4556CAD81}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="QueueId">
+          <DTS:VariableValue
+            DTS:DataType="3">0</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{190111D3-FDC5-48A7-8239-2EFA9A298934}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="QueueName">
+          <DTS:VariableValue
+            DTS:DataType="8"
+            xml:space="preserve"></DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:PropertyExpression
+        DTS:Name="Name">"FLC" +  (DT_STR, 3, 1252)  @[User::ProcessUnitFLC]</DTS:PropertyExpression>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\FLC1\EST Start Load"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A72C9BF4-58A7-494B-B490-F82036F35A88}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST Start Load"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+              SQLTask:SqlStatementSource="EXEC dbo.ETLStartLoad ?, ?,?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::ExecuteProcess" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="1"
+                SQLTask:DtsVariableName="User::QueueId" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="2"
+                SQLTask:DtsVariableName="User::ProcessId" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@Level"
+                SQLTask:DtsVariableName="User::Level"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ProcessUnitFLC"
+                SQLTask:DtsVariableName="User::ProcessUnitFLC"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ProcessId"
+                SQLTask:DtsVariableName="User::ProcessId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="2" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC1\EST Stop Load"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2c9bd2a0-6557-45c7-b7ec-bfcdb26e88de}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST Stop Load"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+              SQLTask:SqlStatementSource="EXEC dbo.ETLStopLoad ?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ProcessUnitFLC"
+                SQLTask:DtsVariableName="User::ProcessUnitFLC"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ExecuteProcess"
+                SQLTask:DtsVariableName="User::ExecuteProcess"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC1\Execute Package Task"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{3BD57EBF-8FD7-49F8-9919-A85E7F20ABA0}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute Package Task"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:EventHandlers>
+            <DTS:EventHandler
+              DTS:refId="Package\FLC1\Execute Package Task.EventHandlers[OnError]"
+              DTS:CreationName="OnError"
+              DTS:DTSID="{168D576A-6822-4FCE-ABB3-73D579451401}"
+              DTS:EventID="0"
+              DTS:EventName="OnError"
+              DTS:LocaleID="-1">
+              <DTS:Variables>
+                <DTS:Variable
+                  DTS:CreationName=""
+                  DTS:Description="The propagate property of the event"
+                  DTS:DTSID="{CDC72779-541E-4571-A00B-31DF8E3B7EC8}"
+                  DTS:IncludeInDebugDump="6789"
+                  DTS:Namespace="System"
+                  DTS:ObjectName="Propagate">
+                  <DTS:VariableValue
+                    DTS:DataType="11">-1</DTS:VariableValue>
+                </DTS:Variable>
+              </DTS:Variables>
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\FLC1\Execute Package Task.EventHandlers[OnError]\Execute SQL Task"
+                  DTS:CreationName="Microsoft.ExecuteSQLTask"
+                  DTS:Description="Execute SQL Task"
+                  DTS:DTSID="{83CC730A-E5DB-4908-9DD8-4EF877EAEEE8}"
+                  DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="Execute SQL Task">
+                  <DTS:Variables />
+                  <DTS:PropertyExpression
+                    DTS:Name="SqlStatementSource">"insert into dbo.PackageError values('" +  @[System::PackageID] + "','" +  @[System::MachineName] +"','" +  @[System::PackageName] +"','" +   @[System::TaskName] +"',"+ (DT_WSTR,12) @[System::ErrorCode] +",'" +  @[System::ErrorDescription] +"',getdate())"</DTS:PropertyExpression>
+                  <DTS:ObjectData>
+                    <SQLTask:SqlTaskData
+                      SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+                      SQLTask:SqlStatementSource="insert into dbo.PackageError values('{2002CD36-4312-4A0C-85DA-325AA260A41C}','DESKTOP-R6LFB3P','QueueProcess','Execute SQL Task',0,'',getdate())" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+            </DTS:EventHandler>
+          </DTS:EventHandlers>
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>QueuePackage.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>QueueId</ParameterName>
+                <BindedVariableOrParameterName>User::QueueId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>ProcessId</ParameterName>
+                <BindedVariableOrParameterName>User::ProcessId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC1.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{5EB940A3-B976-434E-ACE6-C2464B4C709D}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::ExecuteProcess] != 0"
+          DTS:From="Package\FLC1\EST Start Load"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\FLC1\Execute Package Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC1.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{E9C3C4E8-51A1-4F01-8F0D-DB26C819798D}"
+          DTS:From="Package\FLC1\Execute Package Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\FLC1\EST Stop Load"
+          DTS:Value="2" />
+      </DTS:PrecedenceConstraints>
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\FLC1.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{74FC901C-8D6A-4ADB-8D42-C9E222C1A01D}"
+          DTS:EventID="1074890460"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{BE54A0E1-E9DC-4CFA-AB87-FE70989DE78E}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables />
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FLC2"
+      DTS:CreationName="STOCK:FORLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="For Loop Container"
+      DTS:DTSID="{86b1d398-dd7c-4d33-afe9-12641d8e40d4}"
+      DTS:EvalExpression="@ExecuteProcess != 0"
+      DTS:ExecutableType="STOCK:FORLOOP"
+      DTS:InitExpression="@ExecuteProcess = 1000"
+      DTS:LocaleID="-1"
+      DTS:MaxConcurrent="1"
+      DTS:MaxErrorCount="0"
+      DTS:ObjectName="FLC2">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{ECBAF8F6-6558-4192-A1A9-9414E62B6565}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="ExecuteProcess">
+          <DTS:VariableValue
+            DTS:DataType="3">0</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{D13929C7-1494-4160-B779-699BC72BDF4D}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="Level">
+          <DTS:VariableValue
+            DTS:DataType="3">1</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{e9a45080-0053-4798-b91c-b2561a890e52}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="ProcessId">
+          <DTS:VariableValue
+            DTS:DataType="3">2</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{a45249e2-11f4-49ca-88c3-b1c9bf947d8c}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="ProcessUnitFLC">
+          <DTS:VariableValue
+            DTS:DataType="3">2</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{5F235DD5-F0E3-4C0A-AD29-142E57A85D55}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="QueueId">
+          <DTS:VariableValue
+            DTS:DataType="3">0</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{c0290705-6211-4288-8a0e-9cc271d0bc92}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="QueueName">
+          <DTS:VariableValue
+            DTS:DataType="8"
+            xml:space="preserve"></DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:PropertyExpression
+        DTS:Name="Name">"FLC" +  (DT_STR, 3, 1252)  @[User::ProcessUnitFLC]</DTS:PropertyExpression>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\FLC2\EST Start Load"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{a2e7bb05-fc9d-46e0-8db5-9a9f3871c479}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST Start Load"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+              SQLTask:SqlStatementSource="EXEC dbo.ETLStartLoad ?, ?,?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::ExecuteProcess" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="1"
+                SQLTask:DtsVariableName="User::QueueId" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="2"
+                SQLTask:DtsVariableName="User::ProcessId" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@Level"
+                SQLTask:DtsVariableName="User::Level"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ProcessUnitFLC"
+                SQLTask:DtsVariableName="User::ProcessUnitFLC"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ProcessId"
+                SQLTask:DtsVariableName="User::ProcessId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="2" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC2\EST Stop Load"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{d6031662-7585-499a-9e3c-a7a52cd8760c}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST Stop Load"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+              SQLTask:SqlStatementSource="EXEC dbo.ETLStopLoad ?,? " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ProcessUnitFLC"
+                SQLTask:DtsVariableName="User::ProcessUnitFLC"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="131"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ExecuteProcess"
+                SQLTask:DtsVariableName="User::ExecuteProcess"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="131"
+                SQLTask:ParameterSize="1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC2\Execute Package Task"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{0699c424-2e92-42d8-9420-5e167b036226}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute Package Task"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:EventHandlers>
+            <DTS:EventHandler
+              DTS:refId="Package\FLC2\Execute Package Task.EventHandlers[OnError]"
+              DTS:CreationName="OnError"
+              DTS:DTSID="{E0ACC49D-8367-48C8-B8DE-9E7184AB8F99}"
+              DTS:EventID="0"
+              DTS:EventName="OnError"
+              DTS:LocaleID="-1">
+              <DTS:Variables>
+                <DTS:Variable
+                  DTS:CreationName=""
+                  DTS:Description="The propagate property of the event"
+                  DTS:DTSID="{26C2E1BF-96A0-4D5A-8646-EF6FC3BE14AB}"
+                  DTS:IncludeInDebugDump="6789"
+                  DTS:Namespace="System"
+                  DTS:ObjectName="Propagate">
+                  <DTS:VariableValue
+                    DTS:DataType="11">-1</DTS:VariableValue>
+                </DTS:Variable>
+              </DTS:Variables>
+              <DTS:Executables />
+            </DTS:EventHandler>
+          </DTS:EventHandlers>
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>QueuePackage.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>QueueId</ParameterName>
+                <BindedVariableOrParameterName>User::QueueId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>ProcessId</ParameterName>
+                <BindedVariableOrParameterName>User::ProcessId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC2.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{19962323-ee2d-4f1e-99c2-4fad3fefbc35}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::ExecuteProcess] != 0"
+          DTS:From="Package\FLC2\EST Start Load"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\FLC2\Execute Package Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC2.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{3776033e-7878-4a3c-8c15-a4c21e703e8a}"
+          DTS:From="Package\FLC2\Execute Package Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\FLC2\EST Stop Load"
+          DTS:Value="2" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FLC3"
+      DTS:CreationName="STOCK:FORLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="For Loop Container"
+      DTS:DTSID="{ab958ec9-9956-45ef-941f-43903987e687}"
+      DTS:EvalExpression="@ExecuteProcess != 0"
+      DTS:ExecutableType="STOCK:FORLOOP"
+      DTS:InitExpression="@ExecuteProcess = 1000"
+      DTS:LocaleID="-1"
+      DTS:MaxConcurrent="1"
+      DTS:MaxErrorCount="0"
+      DTS:ObjectName="FLC3">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{6DCEA1AC-134D-4E2D-A22F-106679DC5A96}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="ExecuteProcess">
+          <DTS:VariableValue
+            DTS:DataType="3">0</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{178F63F5-C4D5-4EC2-B920-40FA4F740A03}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="Level">
+          <DTS:VariableValue
+            DTS:DataType="3">1</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{fb6293b9-8e53-45e7-85f0-4d13ef948fee}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="ProcessId">
+          <DTS:VariableValue
+            DTS:DataType="3">2</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{596cf929-bd6f-4d2c-aa88-1969cbdc8931}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="ProcessUnitFLC">
+          <DTS:VariableValue
+            DTS:DataType="3">3</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{DBB863C7-62E5-4576-9FE9-A80AC64C3039}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="QueueId">
+          <DTS:VariableValue
+            DTS:DataType="3">0</DTS:VariableValue>
+        </DTS:Variable>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{a081f054-a212-4b9f-a57b-e733155dbc98}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="QueueName">
+          <DTS:VariableValue
+            DTS:DataType="8"
+            xml:space="preserve"></DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:PropertyExpression
+        DTS:Name="Name">"FLC" +  (DT_STR, 3, 1252)  @[User::ProcessUnitFLC]</DTS:PropertyExpression>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\FLC3\EST Start Load"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9e96689f-c0fa-4c61-995d-2c94d02e91ea}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST Start Load"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+              SQLTask:SqlStatementSource="EXEC dbo.ETLStartLoad ?, ?,?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::ExecuteProcess" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="1"
+                SQLTask:DtsVariableName="User::QueueId" />
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="2"
+                SQLTask:DtsVariableName="User::ProcessId" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@Level"
+                SQLTask:DtsVariableName="User::Level"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ProcessUnitFLC"
+                SQLTask:DtsVariableName="User::ProcessUnitFLC"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ProcessId"
+                SQLTask:DtsVariableName="User::ProcessId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="2" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC3\EST Stop Load"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{f52aad90-4383-47df-a71d-947c31e59ab5}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST Stop Load"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{19A7488B-263F-40F3-8A96-381897DB9D7E}"
+              SQLTask:SqlStatementSource="EXEC dbo.ETLStopLoad ? , ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ProcessUnitFLC"
+                SQLTask:DtsVariableName="User::ProcessUnitFLC"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="131"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ExecuteProcess"
+                SQLTask:DtsVariableName="User::ExecuteProcess"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="131"
+                SQLTask:ParameterSize="1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC3\Execute Package Task"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{35f84981-627d-4c08-ab06-82ed621a9103}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute Package Task"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:EventHandlers>
+            <DTS:EventHandler
+              DTS:refId="Package\FLC3\Execute Package Task.EventHandlers[OnError]"
+              DTS:CreationName="OnError"
+              DTS:DTSID="{9422C064-EB90-4B1B-8375-733985635C93}"
+              DTS:EventID="1694526720"
+              DTS:EventName="OnError"
+              DTS:LocaleID="-1">
+              <DTS:Variables>
+                <DTS:Variable
+                  DTS:CreationName=""
+                  DTS:Description="The propagate property of the event"
+                  DTS:DTSID="{E5214F51-7465-40C0-B50F-70884B27355C}"
+                  DTS:IncludeInDebugDump="6789"
+                  DTS:Namespace="System"
+                  DTS:ObjectName="Propagate">
+                  <DTS:VariableValue
+                    DTS:DataType="11">-1</DTS:VariableValue>
+                </DTS:Variable>
+              </DTS:Variables>
+              <DTS:Executables />
+            </DTS:EventHandler>
+          </DTS:EventHandlers>
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>QueuePackage.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>QueueId</ParameterName>
+                <BindedVariableOrParameterName>User::QueueId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>ProcessId</ParameterName>
+                <BindedVariableOrParameterName>User::ProcessId</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC3.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{26dd619d-ddd4-475e-8509-90fd208712c4}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::ExecuteProcess]   != 0"
+          DTS:From="Package\FLC3\EST Start Load"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\FLC3\Execute Package Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC3.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{1d453ef4-2ca4-45f0-b94b-8d8783d58d87}"
+          DTS:From="Package\FLC3\Execute Package Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\FLC3\EST Stop Load"
+          DTS:Value="2" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F216E3C1-76C0-40F8-AC3B-2119FEA1E5EA}"
+      DTS:From="Package\EST Initial"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Clean Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{B77FB090-9DDC-45D0-8A26-88B93A43A8B7}"
+      DTS:From="Package\Clean Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\FLC3" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{D690B0CE-61B4-4FE8-8387-5FFA79738E93}"
+      DTS:From="Package\Clean Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\FLC2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{34180BDF-63BC-4444-96A4-B2D6E2F3CA65}"
+      DTS:From="Package\Clean Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\FLC1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{321FACFE-86A5-4DF3-9442-0E0AF8C76E55}"
+      DTS:From="Package\FLC1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Execute Load" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{000AE69A-2756-43D3-AF7C-0995C04A2415}"
+      DTS:From="Package\FLC2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Execute Load" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{6B8AA39A-7C6A-4079-B99D-E326322DC699}"
+      DTS:From="Package\FLC3"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Execute Load" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{340452D4-E496-4204-9038-60DDF7C5E7FD}"
+      DTS:From="Package\Execute Load"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\EST Final" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{5ECE44F9-A5B6-4D30-AA33-F00FD47D1A3B}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{42A6EB5E-B63A-4557-AD46-79F7E414E165}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables />
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\Clean Staging"
+          TopLeft="279.166663127641,334.824554668017" />
+        <NodeLayout
+          Size="126.666666666667,42.6666666666667"
+          Id="Package\EST Final"
+          TopLeft="1632.29164646628,313.263163715849" />
+        <NodeLayout
+          Size="149.333333333334,42"
+          Id="Package\EST Initial"
+          TopLeft="44.7916666201004,331.969298039557" />
+        <NodeLayout
+          Size="145.333333333334,42.6666666666667"
+          Id="Package\Execute Load"
+          TopLeft="1439.70831404564,314.578952197883" />
+        <NodeLayout
+          Size="152,42.6666666666667"
+          Id="Package\FLC1\EST Start Load"
+          TopLeft="34.6249999906868,43.1578948527493" />
+        <NodeLayout
+          Size="152,42.6666666666667"
+          Id="Package\FLC1\EST Stop Load"
+          TopLeft="531,38.6842105391944" />
+        <NodeLayout
+          Size="188,42.6666666666667"
+          Id="Package\FLC1\Execute Package Task"
+          TopLeft="268,38.3684210783887" />
+        <EdgeLayout
+          Id="Package\FLC1.PrecedenceConstraints[Constraint]"
+          TopLeft="186.624999990687,62.0964912989023">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="81.3750000093132,0"
+              Start="0,0"
+              End="73.8750000093132,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="73.8750000093132,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="28.9375000046566,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FLC1.PrecedenceConstraints[Constraint 1]"
+          TopLeft="456,59.8596491421249">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="75,0"
+              Start="0,0"
+              End="67.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="67.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="8.445546875,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="721.333333333334,136"
+          Size="721.333333333334,178.666666666667"
+          Id="Package\FLC1"
+          TopLeft="611.874994607642,3.75438358237733" />
+        <NodeLayout
+          Size="149.333333333334,42"
+          Id="Package\FLC2\EST Start Load"
+          TopLeft="33.3750000093133,39.0526316175831" />
+        <NodeLayout
+          Size="152,42.6666666666667"
+          Id="Package\FLC2\EST Stop Load"
+          TopLeft="532.249999981374,38.6842105391943" />
+        <NodeLayout
+          Size="188,42.6666666666667"
+          Id="Package\FLC2\Execute Package Task"
+          TopLeft="267.375000009313,41.7894737743605" />
+        <EdgeLayout
+          Id="Package\FLC2.PrecedenceConstraints[Constraint]"
+          TopLeft="182.708333342647,61.5877193626385">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="84.6666666666665,0"
+              Start="0,0"
+              End="77.1666666666665,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="77.1666666666665,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="30.5833333333332,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FLC2.PrecedenceConstraints[Constraint 1]"
+          TopLeft="455.375000009313,61.5701754901107">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="76.8749999720608,0"
+              Start="0,0"
+              End="69.3749999720608,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="69.3749999720608,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="9.38304686103039,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="721.333333333334,158.666666666667"
+          Size="721.333333333334,202"
+          Id="Package\FLC2"
+          TopLeft="609.999994784598,242.122805150151" />
+        <NodeLayout
+          Size="149.333333333334,42"
+          Id="Package\FLC3\EST Start Load"
+          TopLeft="34.6249999906868,40.4210526959719" />
+        <NodeLayout
+          Size="152,42.6666666666667"
+          Id="Package\FLC3\EST Stop Load"
+          TopLeft="531,38" />
+        <NodeLayout
+          Size="182.666666666667,42"
+          Id="Package\FLC3\Execute Package Task"
+          TopLeft="267.375000009313,39.7368421567774" />
+        <EdgeLayout
+          Id="Package\FLC3.PrecedenceConstraints[Constraint]"
+          TopLeft="183.95833332402,61.0789474263747">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="83.4166666852929,0"
+              Start="0,0"
+              End="75.9166666852929,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="75.9166666852929,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="29.9583333426464,5,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FLC3.PrecedenceConstraints[Constraint 1]"
+          TopLeft="450.04166667598,60.0350877450553">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="80.95833332402,0"
+              Start="0,0"
+              End="73.45833332402,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="73.45833332402,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="11.42471353701,5,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="721.333333333334,158.666666666667"
+          Size="721.333333333334,202"
+          Id="Package\FLC3"
+          TopLeft="619.541661274309,500.45614166449" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="194.124999953434,354.563593020454">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="85.0416631742073,0"
+              Start="0,0"
+              End="77.5416631742073,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="77.5416631742073,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="352.499996460974,377.491221334684">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="508.819442591112,122.964920329806"
+              Start="0,0"
+              End="508.819442591112,115.464920329806">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69.6156642181025" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,69.6156642181025"
+                    Point2="0,73.6156642181025"
+                    Point3="4,73.6156642181025" />
+                  <mssgle:LineSegment
+                    End="504.819442591112,73.6156642181025" />
+                  <mssgle:CubicBezierSegment
+                    Point1="504.819442591112,73.6156642181025"
+                    Point2="508.819442591112,73.6156642181025"
+                    Point3="508.819442591112,77.6156642181025" />
+                  <mssgle:LineSegment
+                    End="508.819442591112,115.464920329806" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="425.833329794308,356.15788800135">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="184.16666499029,-13.0350828511993"
+              Start="0,0"
+              End="176.66666499029,-13.0350828511993">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="88.0833324951451,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="88.0833324951451,0"
+                    Point2="92.0833324951451,0"
+                    Point3="92.0833324951451,-4" />
+                  <mssgle:LineSegment
+                    End="92.0833324951451,-9.03508285119932" />
+                  <mssgle:CubicBezierSegment
+                    Point1="92.0833324951451,-9.03508285119932"
+                    Point2="92.0833324951451,-13.0350828511993"
+                    Point3="96.0833324951451,-13.0350828511993" />
+                  <mssgle:LineSegment
+                    End="176.66666499029,-13.0350828511993" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="352.499996460974,334.824554668017">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="501.152775924445,-152.403504418973"
+              Start="0,0"
+              End="501.152775924445,-144.903504418973">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-87.2397224905913" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-87.2397224905913"
+                    Point2="0,-91.2397224905913"
+                    Point3="4,-91.2397224905913" />
+                  <mssgle:LineSegment
+                    End="497.152775924445,-91.2397224905913" />
+                  <mssgle:CubicBezierSegment
+                    Point1="497.152775924445,-91.2397224905913"
+                    Point2="501.152775924445,-91.2397224905913"
+                    Point3="501.152775924445,-95.2397224905913" />
+                  <mssgle:LineSegment
+                    End="501.152775924445,-144.903504418973" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1091.4305501632,182.421050249044">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="420.944430549109,132.157901948839"
+              Start="0,0"
+              End="420.944430549109,124.657901948839">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.0386563335805" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,49.0386563335805"
+                    Point2="0,53.0386563335805"
+                    Point3="4,53.0386563335805" />
+                  <mssgle:LineSegment
+                    End="416.944430549109,53.0386563335805" />
+                  <mssgle:CubicBezierSegment
+                    Point1="416.944430549109,53.0386563335805"
+                    Point2="420.944430549109,53.0386563335805"
+                    Point3="420.944430549109,57.0386563335805" />
+                  <mssgle:LineSegment
+                    End="420.944430549109,124.657901948839" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="1331.33332811793,339.517545340684">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="108.374985927709,0"
+              Start="0,0"
+              End="100.874985927709,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="100.874985927709,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="1099.09721682986,500.45614166449">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="413.277763882442,-143.21052279994"
+              Start="0,0"
+              End="413.277763882442,-135.71052279994">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-53.474381706505" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-53.474381706505"
+                    Point2="0,-57.474381706505"
+                    Point3="4,-57.474381706505" />
+                  <mssgle:LineSegment
+                    End="409.277763882442,-57.474381706505" />
+                  <mssgle:CubicBezierSegment
+                    Point1="409.277763882442,-57.474381706505"
+                    Point2="413.277763882442,-57.474381706505"
+                    Point3="413.277763882442,-61.474381706505" />
+                  <mssgle:LineSegment
+                    End="413.277763882442,-135.71052279994" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="1585.04164737897,335.254391290199">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47.2499990873068,0"
+              Start="0,0"
+              End="39.7499990873068,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="39.7499990873068,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package\Execute Load.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Execute Load.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="918,238" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\FLC1\Execute Package Task.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\FLC1\Execute Package Task.EventHandlers[OnError]\Execute SQL Task"
+          TopLeft="1361,333" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

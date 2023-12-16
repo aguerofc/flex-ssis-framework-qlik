@@ -1,0 +1,2343 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/7/2019 9:56:15 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-VN16KCP"
+  DTS:CreatorName="DESKTOP-VN16KCP\alexk"
+  DTS:DTSID="{EF87767B-1FAA-4110-959E-869B67F736E4}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5270.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ICG_Qlik_VentasCAB01"
+  DTS:PackageType="5"
+  DTS:VersionBuild="311"
+  DTS:VersionGUID="{0B0922C1-2964-4FA1-A5D0-94AFF961D49B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Destination]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{FF0B6054-04AB-46FE-8433-B2CF04C320C2}"
+      DTS:ObjectName="Destination">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-R6LFB3P;Initial Catalog=QlikICG;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-DataFlow-{FF0B6054-04AB-46FE-8433-B2CF04C320C2}Destination;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ETLAdmin]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B2084938-C2FB-4F72-908D-F0BD8AD28BED}"
+      DTS:ObjectName="ETLAdmin">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-R6LFB3P;Initial Catalog=ETLAdmin;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-DataFlow-{B2084938-C2FB-4F72-908D-F0BD8AD28BED}ETLAdmin;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Source]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0540093C-70A5-49DE-9384-82AA25908F18}"
+      DTS:ObjectName="Source">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source= " +   @[$Package::ServerName] + ";Provider=MSOLEDBSQL.1;Initial Catalog=" + @[$Package::DataBaseName] + ";Integrated Security=SSPI;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source= DESKTOP-R6LFB3P;Initial Catalog=Source1;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5EF4C36A-FD2F-4B57-86AB-443D91E13419}"
+      DTS:ObjectName="Credential">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{A671FDD3-DC8E-4812-9835-84ECE8578DDC}"
+      DTS:ObjectName="DataBaseName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Source1</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{237B4CC0-67D1-4231-A08D-90B801E04012}"
+      DTS:ObjectName="ExecutePackage">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{04A629C1-95F4-49E6-85F1-08265A0E0487}"
+      DTS:ObjectName="PackageId">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">1</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{7F2936C5-1B70-424F-96FB-56EE15C9DEC2}"
+      DTS:ObjectName="QueueCode">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">1</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{7D0063AF-7EEE-40DD-8076-C009EA8AEC8D}"
+      DTS:ObjectName="QueueName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">LoremIpsumDolorSitAmetConsecteturDipiscing</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{178C85A0-1A2B-43EE-BFE7-00B6466433E3}"
+      DTS:ObjectName="ServerName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">DESKTOP-R6LFB3P</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{0726D918-E87B-4B54-8ADF-D783E645D497}"
+      DTS:ObjectName="UserId">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue"
+        xml:space="preserve"></DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8220D491-E657-4972-9425-98E934BFE63B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DateProcess">
+      <DTS:VariableValue
+        DTS:DataType="8">2021-01-01</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C1A2D7C4-ECC0-4278-914B-79599F0D453C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordTransferred">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A59BDF89-DC59-48BE-99D5-F2BFE9226C06}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT [Local_Comercial]&#xA;      ,[Serie_Factura]&#xA;      ,[Numero_Factura]&#xA;      ,[N]&#xA;      ,[Fecha_Hora]&#xA;      ,[Subtotal]&#xA;      ,[Monto_Total]&#xA;      ,[Impuesto_Ventas]&#xA;      ,[Impuesto_Servicio]&#xA;      ,[Descuentos]&#xA;      ,[Pax]&#xA;      ,[TipoVenta]&#xA;      ,[Transacciones]&#xA;      ,[Importe]&#xA;      ,[Total_Venta]&#xA;      ,[Comensales]&#xA;      ,[Promedio]&#xA;      ,[Venta_Neta]&#xA;      ,[Costo Total]&#xA;      ,[Costo con Imp]&#xA;  FROM [dbo].[ICG_QLIK_VENTASCAB01] &#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLStaging">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT [Local_Comercial]
+      ,[Serie_Factura]
+      ,[Numero_Factura]
+      ,[N]
+      ,[Fecha_Hora]
+      ,[Subtotal]
+      ,[Monto_Total]
+      ,[Impuesto_Ventas]
+      ,[Impuesto_Servicio]
+      ,[Descuentos]
+      ,[Pax]
+      ,[TipoVenta]
+      ,[Transacciones]
+      ,[Importe]
+      ,[Total_Venta]
+      ,[Comensales]
+      ,[Promedio]
+      ,[Venta_Neta]
+      ,[Costo Total]
+      ,[Costo con Imp]
+  FROM [dbo].[ICG_QLIK_VENTASCAB01] 
+</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Begin"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{218E065D-275E-4160-A335-25EB087A30E4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Begin"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Begin.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{7B1A4B0C-53DA-49A6-98F3-93CE2E323FDF}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{8C2E016A-3554-4534-9130-62B432BBAEF6}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">0</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Begin.EventHandlers[OnError]\Fail DFT"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{E0CC15BB-2195-430C-BF3E-839C77DF5EA8}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fail DFT"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{B2084938-C2FB-4F72-908D-F0BD8AD28BED}"
+                  SQLTask:SqlStatementSource="EXEC dbo.ETLDataFlowStatus 3,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="@ExecutePackage"
+                    SQLTask:DtsVariableName="$Package::ExecutePackage"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="2"
+                    SQLTask:ParameterSize="1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="@RecordsTransferred"
+                    SQLTask:DtsVariableName="User::RecordTransferred"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="2" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B2084938-C2FB-4F72-908D-F0BD8AD28BED}"
+          SQLTask:SqlStatementSource="EXEC dbo.ETLDataFlowStatus 1,?,0&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="@ExecutePackage"
+            SQLTask:DtsVariableName="$Package::ExecutePackage"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="2"
+            SQLTask:ParameterSize="1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DFT Destination"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{AB670BCA-5A0F-4D42-9E81-76F0FB06B631}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT Destination"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\DFT Destination.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{AB0DD41E-D04C-409A-B993-177756870F76}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{46621E2D-DAA2-4229-9A2F-94F86D2EBEFC}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">0</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\DFT Destination.EventHandlers[OnError]\Fail DFT"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{EED2B990-846A-4894-A3AF-BD0D6A7D4514}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fail DFT"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{B2084938-C2FB-4F72-908D-F0BD8AD28BED}"
+                  SQLTask:SqlStatementSource="EXEC dbo.ETLDataFlowStatus 3,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="@ExecutePackage"
+                    SQLTask:DtsVariableName="$Package::ExecutePackage"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="2"
+                    SQLTask:ParameterSize="1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="@RecordsTransferred"
+                    SQLTask:DtsVariableName="User::RecordTransferred"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="2" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          autoAdjustBufferSize="true"
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT Destination\ODD Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="ODD Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[QLIK_VENTASCAB01]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Destination\ODD Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Destination]"
+                  connectionManagerRefId="Package.ConnectionManagers[Destination]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Serie_Factura]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="Serie_Factura"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Serie_Factura]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Serie_Factura]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Numero_Factura]"
+                      cachedDataType="i4"
+                      cachedName="Numero_Factura"
+                      cachedSortKeyPosition="2"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Numero_Factura]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Numero_Factura]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Local_Comercial]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Local_Comercial"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Local_Comercial]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Local_Comercial]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[N]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="N"
+                      cachedSortKeyPosition="3"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[N]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[N]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Fecha_Hora]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Fecha_Hora"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Fecha_Hora]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Fecha_Hora]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Subtotal]"
+                      cachedDataType="r8"
+                      cachedName="Subtotal"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Subtotal]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Subtotal]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Monto_Total]"
+                      cachedDataType="r8"
+                      cachedName="Monto_Total"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Monto_Total]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Monto_Total]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Impuesto_Ventas]"
+                      cachedDataType="r8"
+                      cachedName="Impuesto_Ventas"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Impuesto_Ventas]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Impuesto_Ventas]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Impuesto_Servicio]"
+                      cachedDataType="r8"
+                      cachedName="Impuesto_Servicio"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Impuesto_Servicio]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Impuesto_Servicio]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Descuentos]"
+                      cachedDataType="r8"
+                      cachedName="Descuentos"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Descuentos]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Descuentos]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Pax]"
+                      cachedDataType="i4"
+                      cachedName="Pax"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pax]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Pax]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[TipoVenta]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="TipoVenta"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[TipoVenta]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[TipoVenta]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Transacciones]"
+                      cachedDataType="i4"
+                      cachedName="Transacciones"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Transacciones]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Transacciones]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Importe]"
+                      cachedDataType="r8"
+                      cachedName="Importe"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Importe]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Importe]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Total_Venta]"
+                      cachedDataType="r8"
+                      cachedName="Total_Venta"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Total_Venta]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Total_Venta]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Comensales]"
+                      cachedDataType="i4"
+                      cachedName="Comensales"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comensales]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Comensales]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Promedio]"
+                      cachedDataType="numeric"
+                      cachedName="Promedio"
+                      cachedPrecision="16"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Promedio]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Promedio]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Venta_Neta]"
+                      cachedDataType="r8"
+                      cachedName="Venta_Neta"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Venta_Neta]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Venta_Neta]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Costo Total]"
+                      cachedDataType="r8"
+                      cachedName="Costo Total"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Costo Total]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Costo Total]" />
+                    <inputColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].Columns[Costo con Imp]"
+                      cachedDataType="r8"
+                      cachedName="Costo con Imp"
+                      externalMetadataColumnId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Costo con Imp]"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Costo con Imp]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Serie_Factura]"
+                      dataType="wstr"
+                      length="4"
+                      name="Serie_Factura" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Numero_Factura]"
+                      dataType="i4"
+                      name="Numero_Factura" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Local_Comercial]"
+                      dataType="wstr"
+                      length="30"
+                      name="Local_Comercial" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[N]"
+                      dataType="wstr"
+                      length="1"
+                      name="N" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Fecha_Hora]"
+                      dataType="dbTimeStamp"
+                      name="Fecha_Hora" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Subtotal]"
+                      dataType="r8"
+                      name="Subtotal" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Monto_Total]"
+                      dataType="r8"
+                      name="Monto_Total" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Impuesto_Ventas]"
+                      dataType="r8"
+                      name="Impuesto_Ventas" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Impuesto_Servicio]"
+                      dataType="r8"
+                      name="Impuesto_Servicio" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Descuentos]"
+                      dataType="r8"
+                      name="Descuentos" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Pax]"
+                      dataType="i4"
+                      name="Pax" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[TipoVenta]"
+                      dataType="wstr"
+                      length="35"
+                      name="TipoVenta" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Transacciones]"
+                      dataType="i4"
+                      name="Transacciones" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Importe]"
+                      dataType="r8"
+                      name="Importe" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Total_Venta]"
+                      dataType="r8"
+                      name="Total_Venta" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Comensales]"
+                      dataType="i4"
+                      name="Comensales" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Promedio]"
+                      dataType="numeric"
+                      name="Promedio"
+                      precision="16"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Venta_Neta]"
+                      dataType="r8"
+                      name="Venta_Neta" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Costo Total]"
+                      dataType="r8"
+                      name="Costo Total" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input].ExternalColumns[Costo con Imp]"
+                      dataType="r8"
+                      name="Costo con Imp" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Destination\ODD Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Destination\ODD Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\ODD Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODD Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\ODD Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Destination\ODS Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ODS Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[V_Tiempos_Cocina]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  [Dpto]
+      ,[Nombre_Departamento]
+      ,[Seccion]
+      ,[Nombre_Seccion]
+      ,[Referencia]
+      ,[NombreVendedor]
+      ,[IdLineaPedido]
+      ,[IdPedido]
+      ,[IdArticulo]
+      ,[Descripcion]
+      ,[Orden]
+      ,[Estado]
+      ,[Unidades]
+      ,[IsAnulada]
+      ,[TicksPedido]
+      ,[TicksAPreparar]
+      ,[TicksInicioPreparacion]
+      ,[TicksPreparado]
+      ,[TicksServido]
+      ,[duracionTotalSegundos]
+      ,[dddDuraPedidoaPreparar]
+      ,[dddDuraPrepararAIniciaPrep]
+      ,[dddDuraIniciaPrepAPreparado]
+      ,[dddDuraPreparadoaServido]
+      ,[duracionTotal]
+      ,[RANGO]
+  FROM [dbo].[V_Tiempos_Cocina]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable">User::SQLStaging</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Destination\ODS Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Source]"
+                  connectionManagerRefId="Package.ConnectionManagers[Source]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Local_Comercial]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Local_Comercial]"
+                      length="30"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Local_Comercial]"
+                      name="Local_Comercial"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Serie_Factura]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Serie_Factura]"
+                      length="4"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Serie_Factura]"
+                      name="Serie_Factura"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Numero_Factura]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Numero_Factura]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Numero_Factura]"
+                      name="Numero_Factura"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[N]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[N]"
+                      length="1"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[N]"
+                      name="N"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Fecha_Hora]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Fecha_Hora]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Fecha_Hora]"
+                      name="Fecha_Hora"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Subtotal]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Subtotal]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Subtotal]"
+                      name="Subtotal"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Monto_Total]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Monto_Total]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Monto_Total]"
+                      name="Monto_Total"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Impuesto_Ventas]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Impuesto_Ventas]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Impuesto_Ventas]"
+                      name="Impuesto_Ventas"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Impuesto_Servicio]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Impuesto_Servicio]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Impuesto_Servicio]"
+                      name="Impuesto_Servicio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Descuentos]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Descuentos]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Descuentos]"
+                      name="Descuentos"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Pax]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Pax]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Pax]"
+                      name="Pax"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[TipoVenta]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[TipoVenta]"
+                      length="35"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[TipoVenta]"
+                      name="TipoVenta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Transacciones]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Transacciones]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Transacciones]"
+                      name="Transacciones"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Importe]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Importe]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Importe]"
+                      name="Importe"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Total_Venta]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Total_Venta]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Total_Venta]"
+                      name="Total_Venta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Comensales]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Comensales]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Comensales]"
+                      name="Comensales"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Promedio]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Promedio]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Promedio]"
+                      name="Promedio"
+                      precision="16"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Venta_Neta]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Venta_Neta]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Venta_Neta]"
+                      name="Venta_Neta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Costo Total]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Costo Total]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Costo Total]"
+                      name="Costo Total"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Costo con Imp]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Costo con Imp]"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Costo con Imp]"
+                      name="Costo con Imp"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Local_Comercial]"
+                      dataType="wstr"
+                      length="30"
+                      name="Local_Comercial" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Serie_Factura]"
+                      dataType="wstr"
+                      length="4"
+                      name="Serie_Factura" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Numero_Factura]"
+                      dataType="i4"
+                      name="Numero_Factura" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[N]"
+                      dataType="wstr"
+                      length="1"
+                      name="N" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Fecha_Hora]"
+                      dataType="dbTimeStamp"
+                      name="Fecha_Hora" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Subtotal]"
+                      dataType="r8"
+                      name="Subtotal" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Monto_Total]"
+                      dataType="r8"
+                      name="Monto_Total" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Impuesto_Ventas]"
+                      dataType="r8"
+                      name="Impuesto_Ventas" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Impuesto_Servicio]"
+                      dataType="r8"
+                      name="Impuesto_Servicio" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Descuentos]"
+                      dataType="r8"
+                      name="Descuentos" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Pax]"
+                      dataType="i4"
+                      name="Pax" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[TipoVenta]"
+                      dataType="wstr"
+                      length="35"
+                      name="TipoVenta" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Transacciones]"
+                      dataType="i4"
+                      name="Transacciones" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Importe]"
+                      dataType="r8"
+                      name="Importe" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Total_Venta]"
+                      dataType="r8"
+                      name="Total_Venta" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Comensales]"
+                      dataType="i4"
+                      name="Comensales" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Promedio]"
+                      dataType="numeric"
+                      name="Promedio"
+                      precision="16"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Venta_Neta]"
+                      dataType="r8"
+                      name="Venta_Neta" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Costo Total]"
+                      dataType="r8"
+                      name="Costo Total" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].ExternalColumns[Costo con Imp]"
+                      dataType="r8"
+                      name="Costo con Imp" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Local_Comercial]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Local_Comercial]"
+                      name="Local_Comercial" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Serie_Factura]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Serie_Factura]"
+                      name="Serie_Factura" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Numero_Factura]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Numero_Factura]"
+                      name="Numero_Factura" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[N]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[N]"
+                      name="N" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Fecha_Hora]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Fecha_Hora]"
+                      name="Fecha_Hora" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Subtotal]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Subtotal]"
+                      name="Subtotal" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Monto_Total]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Monto_Total]"
+                      name="Monto_Total" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Impuesto_Ventas]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Impuesto_Ventas]"
+                      name="Impuesto_Ventas" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Impuesto_Servicio]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Impuesto_Servicio]"
+                      name="Impuesto_Servicio" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Descuentos]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Descuentos]"
+                      name="Descuentos" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Pax]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Pax]"
+                      name="Pax" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[TipoVenta]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[TipoVenta]"
+                      name="TipoVenta" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Transacciones]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Transacciones]"
+                      name="Transacciones" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Importe]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Importe]"
+                      name="Importe" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Total_Venta]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Total_Venta]"
+                      name="Total_Venta" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Comensales]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Comensales]"
+                      name="Comensales" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Promedio]"
+                      dataType="numeric"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Promedio]"
+                      name="Promedio"
+                      precision="16"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Venta_Neta]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Venta_Neta]"
+                      name="Venta_Neta" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Costo Total]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Costo Total]"
+                      name="Costo Total" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Costo con Imp]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[Costo con Imp]"
+                      name="Costo con Imp" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Destination\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RecordTransferred</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DFT Destination\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Destination\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DFT Destination\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Destination\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DFT Destination\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Local_Comercial]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Local_Comercial"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Local_Comercial]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Serie_Factura]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="Serie_Factura"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Serie_Factura]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Numero_Factura]"
+                      cachedDataType="i4"
+                      cachedName="Numero_Factura"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Numero_Factura]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[N]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="N"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[N]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">3</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Fecha_Hora]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Fecha_Hora"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Fecha_Hora]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Subtotal]"
+                      cachedDataType="r8"
+                      cachedName="Subtotal"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Subtotal]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Monto_Total]"
+                      cachedDataType="r8"
+                      cachedName="Monto_Total"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Monto_Total]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Impuesto_Ventas]"
+                      cachedDataType="r8"
+                      cachedName="Impuesto_Ventas"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Impuesto_Ventas]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Impuesto_Servicio]"
+                      cachedDataType="r8"
+                      cachedName="Impuesto_Servicio"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Impuesto_Servicio]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Descuentos]"
+                      cachedDataType="r8"
+                      cachedName="Descuentos"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Descuentos]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Pax]"
+                      cachedDataType="i4"
+                      cachedName="Pax"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Pax]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[TipoVenta]"
+                      cachedDataType="wstr"
+                      cachedLength="35"
+                      cachedName="TipoVenta"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[TipoVenta]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Transacciones]"
+                      cachedDataType="i4"
+                      cachedName="Transacciones"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Transacciones]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Importe]"
+                      cachedDataType="r8"
+                      cachedName="Importe"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Importe]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Total_Venta]"
+                      cachedDataType="r8"
+                      cachedName="Total_Venta"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Total_Venta]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Comensales]"
+                      cachedDataType="i4"
+                      cachedName="Comensales"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Comensales]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Promedio]"
+                      cachedDataType="numeric"
+                      cachedName="Promedio"
+                      cachedPrecision="16"
+                      cachedScale="2"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Promedio]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Venta_Neta]"
+                      cachedDataType="r8"
+                      cachedName="Venta_Neta"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Venta_Neta]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Costo Total]"
+                      cachedDataType="r8"
+                      cachedName="Costo Total"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Costo Total]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Destination\Sort.Inputs[Sort Input].Columns[Costo con Imp]"
+                      cachedDataType="r8"
+                      cachedName="Costo con Imp"
+                      lineageId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Costo con Imp]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Destination\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Local_Comercial]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Local_Comercial]"
+                      name="Local_Comercial">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Local_Comercial]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Serie_Factura]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Serie_Factura]"
+                      name="Serie_Factura"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Serie_Factura]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Numero_Factura]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Numero_Factura]"
+                      name="Numero_Factura"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Numero_Factura]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[N]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[N]"
+                      name="N"
+                      sortKeyPosition="3">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[N]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Fecha_Hora]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Fecha_Hora]"
+                      name="Fecha_Hora">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Fecha_Hora]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Subtotal]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Subtotal]"
+                      name="Subtotal">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Subtotal]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Monto_Total]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Monto_Total]"
+                      name="Monto_Total">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Monto_Total]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Impuesto_Ventas]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Impuesto_Ventas]"
+                      name="Impuesto_Ventas">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Impuesto_Ventas]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Impuesto_Servicio]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Impuesto_Servicio]"
+                      name="Impuesto_Servicio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Impuesto_Servicio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Descuentos]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Descuentos]"
+                      name="Descuentos">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Descuentos]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Pax]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Pax]"
+                      name="Pax">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Pax]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[TipoVenta]"
+                      dataType="wstr"
+                      length="35"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[TipoVenta]"
+                      name="TipoVenta">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[TipoVenta]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Transacciones]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Transacciones]"
+                      name="Transacciones">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Transacciones]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Importe]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Importe]"
+                      name="Importe">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Importe]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Total_Venta]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Total_Venta]"
+                      name="Total_Venta">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Total_Venta]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Comensales]"
+                      dataType="i4"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Comensales]"
+                      name="Comensales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Comensales]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Promedio]"
+                      dataType="numeric"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Promedio]"
+                      name="Promedio"
+                      precision="16"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Promedio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Venta_Neta]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Venta_Neta]"
+                      name="Venta_Neta">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Venta_Neta]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Costo Total]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Costo Total]"
+                      name="Costo Total">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Costo Total]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Costo con Imp]"
+                      dataType="r8"
+                      lineageId="Package\DFT Destination\Sort.Outputs[Sort Output].Columns[Costo con Imp]"
+                      name="Costo con Imp">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output].Columns[Costo con Imp]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT Destination.Paths[OLE DB Source Output]"
+              endId="Package\DFT Destination\Sort.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT Destination\ODS Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DFT Destination.Paths[Row Count Output 1]"
+              endId="Package\DFT Destination\ODD Destination.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\DFT Destination\Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\DFT Destination.Paths[Sort Output]"
+              endId="Package\DFT Destination\Row Count.Inputs[Row Count Input 1]"
+              name="Sort Output"
+              startId="Package\DFT Destination\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{17393E4F-9922-43A1-9EBE-70ADCE3A91BF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\End.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{BF40375E-8DCC-4088-A356-68037744A7DE}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{8F1231EB-2722-4723-9C75-9CF6C1EF127F}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">0</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\End.EventHandlers[OnError]\Fail DFT"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{882A9E83-76A4-440C-B673-4303C2480D98}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fail DFT"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{B2084938-C2FB-4F72-908D-F0BD8AD28BED}"
+                  SQLTask:SqlStatementSource="EXEC dbo.ETLDataFlowStatus 3,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="@ExecutePackage"
+                    SQLTask:DtsVariableName="$Package::ExecutePackage"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="2"
+                    SQLTask:ParameterSize="1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="@RecordsTransferred"
+                    SQLTask:DtsVariableName="User::RecordTransferred"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="2" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B2084938-C2FB-4F72-908D-F0BD8AD28BED}"
+          SQLTask:SqlStatementSource="EXEC dbo.ETLDataFlowStatus 2,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="@ExecutePackage"
+            SQLTask:DtsVariableName="$Package::ExecutePackage"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="2"
+            SQLTask:ParameterSize="1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="@RecordsTransferred"
+            SQLTask:DtsVariableName="User::RecordTransferred"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="2" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Parameters"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{CC31131B-1D8D-4409-9386-997AB8091A88}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Parameters"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Get Parameters.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{B0B36CA4-9CB8-42D1-A7BF-715C9B0B9CDC}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{AF2260FA-09BD-43E9-AAFB-2E7E73FB7527}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">0</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Get Parameters.EventHandlers[OnError]\Fail DFT"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{D32B3133-DC4D-47D5-B650-9A0E3CF56871}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Fail DFT"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{B2084938-C2FB-4F72-908D-F0BD8AD28BED}"
+                  SQLTask:SqlStatementSource="EXEC dbo.ETLDataFlowStatus 3,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="@ExecutePackage"
+                    SQLTask:DtsVariableName="$Package::ExecutePackage"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="2"
+                    SQLTask:ParameterSize="1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="@RecordsTransferred"
+                    SQLTask:DtsVariableName="User::RecordTransferred"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="2" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B2084938-C2FB-4F72-908D-F0BD8AD28BED}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[ETLGetParameters] ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::DateProcess" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="@PackageId"
+            SQLTask:DtsVariableName="$Package::PackageId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="0" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A38BBCE8-0226-48C9-80FE-ACBCB31183BC}"
+      DTS:From="Package\Begin"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Parameters" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{49B89264-09AA-452A-A108-D7ABDFDC3B4E}"
+      DTS:From="Package\DFT Destination"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\End" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{CF98E14C-8E6A-4478-9686-5851ECE4E404}"
+      DTS:From="Package\Get Parameters"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\DFT Destination" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{B53982E6-A1C7-4456-AE46-4DBA353B8EC5}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{EEA1B762-9892-48AF-BF54-E8DB1AF4EF24}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">0</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Fail DFT"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{24592276-EE66-439F-B11F-D0FB0D876ED7}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fail DFT"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{B2084938-C2FB-4F72-908D-F0BD8AD28BED}"
+              SQLTask:SqlStatementSource="EXEC dbo.ETLDataFlowStatus 3,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@ExecutePackage"
+                SQLTask:DtsVariableName="$Package::ExecutePackage"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="2"
+                SQLTask:ParameterSize="1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@RecordsTransferred"
+                SQLTask:DtsVariableName="User::RecordTransferred"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="2" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="106.666666666667,42.6666666666667"
+          Id="Package\Begin"
+          TopLeft="484.666667896011,142.17544166159" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\DFT Destination"
+          TopLeft="464.291668259228,300.28070612022" />
+        <NodeLayout
+          Size="120,42.6666666666667"
+          Id="Package\End"
+          TopLeft="485.791667029882,398.543868612605" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Get Parameters"
+          TopLeft="459.541667421038,220.175443129746" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="537.437500991858,184.842108328257">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.3333348014893"
+              Start="0,0"
+              End="0,27.8333348014893">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.8333348014893" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="544.375000977888,342.947372786887">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.5964958257187"
+              Start="0,0"
+              End="0,48.0964958257187">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.0964958257187" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="539.916667840133,262.842109796413">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.4385963238073"
+              Start="0,0"
+              End="0,29.9385963238073">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9385963238073" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="120,42.6666666666667"
+          Id="Package.EventHandlers[OnError]\Fail DFT"
+          TopLeft="781.874989243224,104.473685047633" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Begin.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="120,42.6666666666667"
+          Id="Package\Begin.EventHandlers[OnError]\Fail DFT"
+          TopLeft="893,112" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\DFT Destination">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\DFT Destination\ODS Source"
+          TopLeft="96.9999998509884,38.2631571091443" />
+        <NodeLayout
+          Size="160,42.6666666666667"
+          Id="Package\DFT Destination\ODD Destination"
+          TopLeft="77.1250001769512,343.368424014702" />
+        <NodeLayout
+          Size="132,42.6666666666667"
+          Id="Package\DFT Destination\Row Count"
+          TopLeft="89.9999986588954,216.894740924611" />
+        <EdgeLayout
+          Id="Package\DFT Destination.Paths[Row Count Output 1]"
+          TopLeft="156.562499417923,259.561407591278">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83.8070164234241"
+              Start="0,0"
+              End="0,76.3070164234241">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,76.3070164234241" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="98.6666666666667,42.6666666666667"
+          Id="Package\DFT Destination\Sort"
+          TopLeft="111.874998332933,119.052633819818" />
+        <EdgeLayout
+          Id="Package\DFT Destination.Paths[OLE DB Source Output]"
+          TopLeft="164.104165758627,80.929823775811">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.1228100440069"
+              Start="0,0"
+              End="0,30.6228100440069">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.6228100440069" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT Destination.Paths[Sort Output]"
+          TopLeft="158.604165162581,161.719300486485">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.1754404381265"
+              Start="0,0"
+              End="0,47.6754404381265">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.6754404381265" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\DFT Destination.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="120,42.6666666666667"
+          Id="Package\DFT Destination.EventHandlers[OnError]\Fail DFT"
+          TopLeft="940,211" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Destination\ODS Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Destination\ODD Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package\End.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="120,42.6666666666667"
+          Id="Package\End.EventHandlers[OnError]\Fail DFT"
+          TopLeft="1017,218" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package\Get Parameters.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="120,42.6666666666667"
+          Id="Package\Get Parameters.EventHandlers[OnError]\Fail DFT"
+          TopLeft="957,243" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
