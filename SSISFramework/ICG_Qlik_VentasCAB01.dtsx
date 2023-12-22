@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ICG_Qlik_VentasCAB01"
   DTS:PackageType="5"
-  DTS:VersionBuild="311"
-  DTS:VersionGUID="{0B0922C1-2964-4FA1-A5D0-94AFF961D49B}">
+  DTS:VersionBuild="317"
+  DTS:VersionGUID="{7B0FEEFA-F6F4-40C4-B0A5-F5CBA9464976}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -154,7 +154,7 @@
       DTS:CreationName=""
       DTS:DTSID="{A59BDF89-DC59-48BE-99D5-F2BFE9226C06}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;SELECT [Local_Comercial]&#xA;      ,[Serie_Factura]&#xA;      ,[Numero_Factura]&#xA;      ,[N]&#xA;      ,[Fecha_Hora]&#xA;      ,[Subtotal]&#xA;      ,[Monto_Total]&#xA;      ,[Impuesto_Ventas]&#xA;      ,[Impuesto_Servicio]&#xA;      ,[Descuentos]&#xA;      ,[Pax]&#xA;      ,[TipoVenta]&#xA;      ,[Transacciones]&#xA;      ,[Importe]&#xA;      ,[Total_Venta]&#xA;      ,[Comensales]&#xA;      ,[Promedio]&#xA;      ,[Venta_Neta]&#xA;      ,[Costo Total]&#xA;      ,[Costo con Imp]&#xA;  FROM [dbo].[ICG_QLIK_VENTASCAB01] &#xA;&quot;"
+      DTS:Expression="&quot;SELECT [Local_Comercial]&#xA;      ,[Serie_Factura]&#xA;      ,[Numero_Factura]&#xA;      ,[N]&#xA;      ,[Fecha_Hora]&#xA;      ,[Subtotal]&#xA;      ,[Monto_Total]&#xA;      ,[Impuesto_Ventas]&#xA;      ,[Impuesto_Servicio]&#xA;      ,[Descuentos]&#xA;      ,[Pax]&#xA;      ,[TipoVenta]&#xA;      ,[Transacciones]&#xA;      ,[Importe]&#xA;      ,[Total_Venta]&#xA;      ,[Comensales]&#xA;      ,[Promedio]&#xA;      ,[Venta_Neta]&#xA;      ,[Costo Total]&#xA;      ,[Costo con Imp]&#xA;  FROM [dbo].[ICG_QLIK_VENTASCAB01]&#xA; WHERE CONVERT( DATE,Fecha_Hora) BETWEEN '&quot; +    @[User::DateProcess]    + &quot;' AND CONVERT(DATE, GETDATE()-1)&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SQLStaging">
@@ -179,8 +179,8 @@
       ,[Venta_Neta]
       ,[Costo Total]
       ,[Costo con Imp]
-  FROM [dbo].[ICG_QLIK_VENTASCAB01] 
-</DTS:VariableValue>
+  FROM [dbo].[ICG_QLIK_VENTASCAB01]
+ WHERE CONVERT( DATE,Fecha_Hora) BETWEEN '2021-01-01' AND CONVERT(DATE, GETDATE()-1)</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -1909,7 +1909,6 @@
       DTS:refId="Package\Get Parameters"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{CC31131B-1D8D-4409-9386-997AB8091A88}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -2193,6 +2192,10 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="98.6666666666667,42.6666666666667"
+          Id="Package\DFT Destination\Sort"
+          TopLeft="111.874998332933,119.052633819818" />
+        <NodeLayout
           Size="140,42.6666666666667"
           Id="Package\DFT Destination\ODS Source"
           TopLeft="96.9999998509884,38.2631571091443" />
@@ -2226,10 +2229,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="98.6666666666667,42.6666666666667"
-          Id="Package\DFT Destination\Sort"
-          TopLeft="111.874998332933,119.052633819818" />
         <EdgeLayout
           Id="Package\DFT Destination.Paths[OLE DB Source Output]"
           TopLeft="164.104165758627,80.929823775811">

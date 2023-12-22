@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ICG_QLIK_VENTASDET01"
   DTS:PackageType="5"
-  DTS:VersionBuild="306"
-  DTS:VersionGUID="{83F0C984-E86C-446D-A247-33748EF094E1}">
+  DTS:VersionBuild="309"
+  DTS:VersionGUID="{2C36178A-FD55-42FC-B4F0-A5C69AB3DBCE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -154,37 +154,32 @@
       DTS:CreationName=""
       DTS:DTSID="{CB028BC7-9E0C-4BB2-8C52-1B75EED0A562}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;SELECT  [Serie_Factura]&#xA;      ,[Numero_Factura]&#xA;      ,[n]&#xA;      ,[NUMALBARAN]&#xA;      ,[NUMSERIE]&#xA;      ,[CODARTICULO]&#xA;      ,[REFERENCIA]&#xA;      ,[Producto]&#xA;      ,[Cantidad]&#xA;      ,[Precio]&#xA;      ,[PrecioVentafinal]&#xA;      ,[Total]&#xA;      ,[Costo]&#xA;      ,[Tipo]&#xA;      ,[CODIGO_SPOONERS]&#xA;      ,[SECCION]&#xA;  FROM [dbo].[ICG_QLIK_VENTASDET01]&quot;"
+      DTS:Expression="&quot;SELECT  d.[Serie_Factura]&#xA;      ,d.[Numero_Factura]&#xA;      ,d.[n]&#xA;      ,d.[NUMALBARAN]&#xA;      ,d.[NUMSERIE]&#xA;      ,d.[CODARTICULO]&#xA;      ,d.[REFERENCIA]&#xA;      ,d.[Producto]&#xA;      ,d.[Cantidad]&#xA;      ,d.[Precio]&#xA;      ,d.[PrecioVentafinal]&#xA;      ,d.[Total]&#xA;      ,d.[Costo]&#xA;      ,d.[Tipo]&#xA;      ,d.[CODIGO_SPOONERS]&#xA;      ,d.[SECCION]&#xA;  &#xA;FROM [dbo].[ICG_QLIK_VENTASDET01] d &#xA;INNER JOIN dbo.ICG_QLIK_VENTASCAB01 h&#xA;ON d.Serie_Factura = h.Serie_Factura and d.Numero_Factura = h.Numero_Factura and d.n=h.n&#xA; WHERE CONVERT( DATE,h.fecha_hora) BETWEEN '&quot; +    @[User::DateProcess]    + &quot;' AND CONVERT(DATE, GETDATE()-1)&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SQLStaging">
       <DTS:VariableValue
-        DTS:DataType="8">SELECT  [Serie_Factura]
-      ,[Numero_Factura]
-      ,[n]
-      ,[NUMALBARAN]
-      ,[NUMSERIE]
-      ,[CODARTICULO]
-      ,[REFERENCIA]
-      ,[Producto]
-      ,[Cantidad]
-      ,[Precio]
-      ,[PrecioVentafinal]
-      ,[Total]
-      ,[Costo]
-      ,[Tipo]
-      ,[CODIGO_SPOONERS]
-      ,[SECCION]
-  FROM [dbo].[ICG_QLIK_VENTASDET01]</DTS:VariableValue>
-    </DTS:Variable>
-    <DTS:Variable
-      DTS:CreationName=""
-      DTS:DTSID="{7797BFB0-368B-48AE-B83A-74C3E7E3505A}"
-      DTS:IncludeInDebugDump="2345"
-      DTS:Namespace="User"
-      DTS:ObjectName="Variable">
-      <DTS:VariableValue
-        DTS:DataType="8">SELECT d.[Serie_Factura]       ,d.[Numero_Factura]       ,d.[n]       ,d.[NUMALBARAN]       ,d.[NUMSERIE]       ,d.[CODARTICULO]       ,d.[REFERENCIA]       ,d.[Producto]       ,d.[Cantidad]       ,d.[Precio]       ,d.[PrecioVentafinal]       ,d.[Total]       ,d.[Costo]       ,d.[Tipo]       ,d.[CODIGO_SPOONERS]       ,d.[SECCION]   FROM [staging].[QLIK_VENTASCAB01] h   INNER JOIN staging.QLIK_VENTASDET01 d on h.Serie_Factura = d.Serie_Factura AND h.Numero_Factura = d.Numero_Factura AND h.N = d.N    WHERE CONVERT (DATE, h.Fecha_Hora ) &gt;= '2018-12-01'</DTS:VariableValue>
+        DTS:DataType="8">SELECT  d.[Serie_Factura]
+      ,d.[Numero_Factura]
+      ,d.[n]
+      ,d.[NUMALBARAN]
+      ,d.[NUMSERIE]
+      ,d.[CODARTICULO]
+      ,d.[REFERENCIA]
+      ,d.[Producto]
+      ,d.[Cantidad]
+      ,d.[Precio]
+      ,d.[PrecioVentafinal]
+      ,d.[Total]
+      ,d.[Costo]
+      ,d.[Tipo]
+      ,d.[CODIGO_SPOONERS]
+      ,d.[SECCION]
+  
+FROM [dbo].[ICG_QLIK_VENTASDET01] d 
+INNER JOIN dbo.ICG_QLIK_VENTASCAB01 h
+ON d.Serie_Factura = h.Serie_Factura and d.Numero_Factura = h.Numero_Factura and d.n=h.n
+ WHERE CONVERT( DATE,h.fecha_hora) BETWEEN '2021-01-01' AND CONVERT(DATE, GETDATE()-1)</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -1701,7 +1696,6 @@
       DTS:refId="Package\Get Parameters"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{730BBFFD-16C5-4B1B-9B8D-496D3030E495}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
